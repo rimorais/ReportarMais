@@ -1,5 +1,6 @@
 package com.example.reportarmais
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -24,6 +25,14 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Não vais passar", Toast.LENGTH_SHORT).show()
 
         }
+
+    }
+
+    fun irParaPagNotas(view: View) {
+
+        val intent = Intent(this, PagNotas::class.java)
+
+        startActivity(intent)
 
     }
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 
-interface WordDao{
+interface NotaDAO{
 
     @Query("SELECT * FROM nota_table ORDER BY data ASC")
     fun getAlphabetizedWords(): Flow<List<Nota>>

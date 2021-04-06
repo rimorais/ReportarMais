@@ -27,6 +27,7 @@ class PagAddNota : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_REPLY, nota)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
+
             finish()
         }
     }

@@ -2,14 +2,11 @@ package com.example.reportarmais
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 
-class MainActivity : AppCompatActivity() {
+class pagNotas : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_pag_notas2)
     }
-
-    fun irParaNotas(view: View) {}
 }

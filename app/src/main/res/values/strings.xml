@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ReportarMais</string>
+    <string name="notas">Ver Notas</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Palavra-Passe</string>
 </resources>

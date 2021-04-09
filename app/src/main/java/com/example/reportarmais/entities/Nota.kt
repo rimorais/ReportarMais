@@ -8,9 +8,10 @@ import androidx.room.PrimaryKey
 
 class Nota(
 
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) val id: String
+    /*
     @ColumnInfo(name = "titulo") val titulo: String,
     @ColumnInfo(name = "conteudo") val conteudo: String,
     @ColumnInfo(name = "data") val data: String
-
+*/
     )

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reportarmais.adapters.NotaAdapter
@@ -34,8 +34,8 @@ class PagNotas : AppCompatActivity() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        /*
-        NotaViewModel.allWords.observe(owner = this) { nota ->
+
+        notaViewModel.allWords.observe(owner = this) { nota ->
             // Update the cached copy of the words in the adapter.
             nota.let { adapter.submitList(it) }
         }
@@ -53,7 +53,7 @@ class PagNotas : AppCompatActivity() {
         if (requestCode == newNotaActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(PagAddNota.EXTRA_REPLY)?.let { reply ->
                 val nota = Nota(reply)
-                NotaViewModel.insert(nota)
+                notaViewModel.insert(nota)
             }
         } else {
             Toast.makeText(
@@ -62,6 +62,6 @@ class PagNotas : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-        */
+
     }
 }

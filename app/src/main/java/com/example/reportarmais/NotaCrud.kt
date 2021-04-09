@@ -68,7 +68,7 @@ class NotaCrud : AppCompatActivity() {
             val record = nota_record.text.toString()
 
             if (record.isBlank() or record.isEmpty()) {
-                Snackbar.make(view, "Empty data is not allowed", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.empty_not_saved, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
             } else {
                 val item = Nota(id = id, texto = record)
@@ -83,7 +83,7 @@ class NotaCrud : AppCompatActivity() {
             val record = nota_record.text.toString()
 
             if (record.isBlank() or record.isEmpty()) {
-                Snackbar.make(view, "Empty data is not allowed", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.empty_not_saved, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
             } else {
                 val item = Nota(id = id, texto = record)

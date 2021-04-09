@@ -11,6 +11,8 @@ import com.example.reportarmais.NotaViewModel
 import kotlinx.android.synthetic.main.activity_pag_notas2.*
 import kotlinx.android.synthetic.main.nota_list_recyclerview.*
 
+private const val TAG = "NotaListActivity"
+
 class pagNotas : AppCompatActivity() {
 
     private lateinit var notaViewModel: NotaViewModel

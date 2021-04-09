@@ -25,20 +25,16 @@ class NotaAdapter internal constructor(context: Context) :
     private val onClickListener: View.OnClickListener
 
     init {
-        /* Remember that his receives a single item of type DataRecord during iteration
-           from:
-                datarecordViewModel.allItems.observe(this, Observer { items ->
-                    items?.let { adapter.setItems(it) }
-                })
-           in the `DataRecordListActivity`
-        * */
+        /*
+        * Colocar um onClickLister em todos os objetos
+        *  */
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as Nota
 
             Log.d(TAG, "Definir onClickListener para o item ${item.id}")
 
-            /* We also want to start a new Intent with Extra Data customized
-               to the `id` of the associated item.
+            /*
+               Começar uma nova intent com Extra Data
              */
 
             val intent = Intent(v.context, NotaCrud::class.java).apply {
@@ -48,36 +44,37 @@ class NotaAdapter internal constructor(context: Context) :
         }
     }
 
-    /* This is an `inner class` that associates associates the items in the ViewHolder
-       layout with variables that will be used inside OnBindViewHolder.
+    /*
+    É uma classe que associa os items no ViewHolder
+       layout com as variáveis que vão ser usadas dentro do OnBindViewHolder
     */
     inner class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemId: TextView = itemView.findViewById(R.id.nota_viewholder_id)
         val itemRecord: TextView = itemView.findViewById(R.id.nota_viewholder_record)
     }
 
-    /* Basically, inflates the ViewHolder layout and returns a ViewHolder object
+    /* Faz o inflate da ViewHolder layout e retorna o objeto ViewHolder
     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaViewHolder {
         val itemView = inflater.inflate(R.layout.nota_viewholder, parent, false)
         return NotaViewHolder(itemView)
     }
 
-    /* This is where the ViewHolder gets populated with data from the Item.
-       Position inside the RecyclerView is also available.
+    /*
+       É aqui que o ViewHolder é populado com os dados do Item
      */
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         val current = itemsList[position]
 
-        // Needed: will be referenced in the View.OnClickListener above
+        // Necessário: vai ser referenciado no View.OnClickListener em cima
         holder.itemView.tag = current
 
         with(holder) {
-            // Set UI values
+            // Definir valores da UI
             itemId.text = current.id.toString()
             itemRecord.text = current.texto
 
-            // Set handlers
+            // Definir handlers
             itemView.setOnClickListener(onClickListener)
         }
     }

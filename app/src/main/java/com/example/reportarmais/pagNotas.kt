@@ -20,16 +20,17 @@ class pagNotas : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Load the layout
+        // Carregar o layout
         setContentView(R.layout.activity_pag_notas2)
         //setSupportActionBar(toolbar)
 
-        // Set an action for the FAB: in particular, this will start a new activity
+        // Definir uma ação para o FAB: vai começar uma nova atividade
         fab_add.setOnClickListener { _ ->
             val intent = Intent(this, NotaCrud::class.java)
             startActivity(intent)
         }
 
+        /* Nota Importante --------------------------------------------------------------------- */
         /* Reference objects inside the loaded layout: notice that in Kotlin we can use short
         names (the IDE will prompt for imports).
 
@@ -48,26 +49,21 @@ class pagNotas : AppCompatActivity() {
         - An Adapter --> we define
         - A LayoutManager --> predefined, either Linear or Grid
          */
+        /* ---------------------------------------------------------------------------------- */
         val recyclerView = nota_list
         val adapter = NotaAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        /* We need the data to populate the list with. For this we will retrieve the ViewModel
-           that we have defined, which in our case is a `DataRecordViewModel::class.java`, from
-           the ViewModelProvider service.
+        /* Popular a lista para isto vamos buscar o ViewModel
+           já definido - `NotaViewModel::class.java`, do
+           serviço ViewModelProvider.
         */
         notaViewModel = ViewModelProvider(this).get(NotaViewModel::class.java)
 
-        /* Simply associate an observer with each of the items contained in the viewmodel.
+        /*
 
-           Notice that this can be done because `allItems` in the `DataRecordViewModel` is a `LiveData`
-           object.
-
-           The method `setItems` of the `DataRecordAdapter` class, takes care of populating each
-           line of the RecyclerView, according to the layout specified in `datarecord_viewholder`.
-
-           This is also where we set any actions (click, longclick...) per item in the list.
+        Associar um Observer com cada um dos items no viewmodel.
 
         */
         notaViewModel.allItems.observe(this, Observer { items ->

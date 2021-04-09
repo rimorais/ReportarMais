@@ -21,14 +21,15 @@ class NotaCrud : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Load the layout
+        // Carregar o layout
         setContentView(R.layout.activity_nota_crud)
 
-        /* Retrieve the ViewModel that we have defined (`DataRecordViewModel::class.java`)
-           from the ViewModelProvider service.
+        /* Buscar o ViewModel definido em (`DataRecordViewModel::class.java`)
+           do serviço ViewModelProvider.
         */
         notaViewModel = ViewModelProvider(this).get(NotaViewModel::class.java)
 
+        /* Nota Importante -------------------------------------------------------------------- */
         /* Check Intent for Extra Data, based on the predefined key (which is the same that we use
            to insert such data. Also notice that since we expect it to be of type Long, we use
            `getLongExtra`. There's getters for different data types.
@@ -55,11 +56,12 @@ class NotaCrud : AppCompatActivity() {
             isEdit = true
         }
 
-        /* Prepare OnClickListeners for each button:
-            Save, Update and Delete.
+        /* ------------------------------------------------------------------------------------ */
 
-           They pretty much do the same operations and checks, but use the specific
-           insert, update, delete method from the ViewModel.
+        /*
+
+        Definir os onClickListeners para as operações de Gravar, Eliminar e Alterar.
+        Isto utiliza as funções no ViewModel.
 
          */
         val btnSave = btnSave
@@ -102,17 +104,16 @@ class NotaCrud : AppCompatActivity() {
             finish()
         }
 
-        /* Hide buttons depending on our case: this is a very simplistic UI management
-           example, and you need to correctly set the constraints on the Layout to make
-           this at least marginally pleasant. There's better ways, of course. :-) .
+        /*
+
+        Esconder os botões dependendo da operação que está a ser realizada.
+
          */
         if (isEdit) {
-            /* btnSave calls the dao.save method, which actually creates a new record
-               By hiding it, we correctly allow only Update and Delete
-             */
+
             btnSave.visibility = View.GONE
         } else {
-            /* No reason to Update or Delete a new Record yet to be saved */
+
             btnUpdate.visibility = View.GONE
             btnDelete.visibility = View.GONE
         }

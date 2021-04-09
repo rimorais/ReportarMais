@@ -104,7 +104,7 @@ class NotaCrud : AppCompatActivity() {
 
         /* Hide buttons depending on our case: this is a very simplistic UI management
            example, and you need to correctly set the constraints on the Layout to make
-           this at least marginally pleasant. There's better ways, of course. :-)
+           this at least marginally pleasant. There's better ways, of course. :-) .
          */
         if (isEdit) {
             /* btnSave calls the dao.save method, which actually creates a new record

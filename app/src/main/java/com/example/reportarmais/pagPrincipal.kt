@@ -28,6 +28,8 @@ class pagPrincipal : AppCompatActivity() {
 
     }
 
+    //Tentar juntar o hotfix
+
     fun irParaPagNotas(view: View) {
 
         val intent = Intent(this, PagNotas::class.java)

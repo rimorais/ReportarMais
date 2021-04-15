@@ -6,4 +6,8 @@
     <string name="empty_not_saved">Cannot Be Empty</string>
     <string name="delete">Delete</string>
     <string name="action_settings">Settings</string>
+    <string name="emailNew">Email</string>
+    <string name="loginNew">Login</string>
+    <string name="notasNew">See Notes</string>
+    <string name="passwordNew">Password</string>
 </resources>

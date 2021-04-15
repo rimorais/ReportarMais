@@ -19,4 +19,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
+    fun irParaMapa(view: View) {
+
+        val intent = Intent(this, MapsActivity::class.java)
+
+        startActivity(intent)
+
+    }
 }

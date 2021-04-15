@@ -4,9 +4,10 @@
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Palavra-Passe</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">D</string>
     <string name="save">Guardar</string>
     <string name="update">Alterar</string>
     <string name="delete">Eliminar</string>
     <string name="empty_not_saved">Não Pode Ser Vazio</string>
+    <string name="title_activity_maps">Mapa</string>
 </resources>

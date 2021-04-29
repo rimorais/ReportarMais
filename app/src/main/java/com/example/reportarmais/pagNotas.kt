@@ -24,6 +24,9 @@ class pagNotas : AppCompatActivity() {
         setContentView(R.layout.activity_pag_notas2)
         //setSupportActionBar(toolbar)
 
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+
         // Set an action for the FAB: in particular, this will start a new activity
         fab_add.setOnClickListener { _ ->
             val intent = Intent(this, NotaCrud::class.java)
@@ -75,4 +78,28 @@ class pagNotas : AppCompatActivity() {
         })
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        val message = intent.getStringExtra(MESSAGE_MAPS)
+
+        if (message == "maps") {
+
+            val intent = Intent(this, MapsActivity::class.java)
+
+            startActivity(intent)
+
+        }
+        else {
+
+            val intent = Intent(this, MainActivity::class.java)
+
+            startActivity(intent)
+
+        }
+
+        return true
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.reportarmais
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,6 +24,9 @@ class NotaCrud : AppCompatActivity() {
 
         // Carregar o layout
         setContentView(R.layout.activity_nota_crud)
+
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
 
         /* Buscar o ViewModel definido em (`DataRecordViewModel::class.java`)
            do serviço ViewModelProvider.
@@ -119,4 +123,15 @@ class NotaCrud : AppCompatActivity() {
         }
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        val intent = Intent(this, pagNotas::class.java)
+
+        startActivity(intent)
+
+        return true
+    }
+
 }

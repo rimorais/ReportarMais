@@ -17,6 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
+const val MESSAGE_MAPS = "maps"
+
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -28,6 +30,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
 
     }
 
@@ -93,7 +98,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             R.id.vernotas-> {
 
-                val intent = Intent(this, pagNotas::class.java)
+                val intent = Intent(this, pagNotas::class.java).apply {
+
+                    putExtra(MESSAGE_MAPS, "maps")
+
+                }
 
                 startActivity(intent)
 
@@ -104,6 +113,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        finishAffinity()
+
+        return true
     }
 
 }

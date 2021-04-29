@@ -14,4 +14,7 @@
     <string name="loginNew">Login</string>
     <string name="notasNew">Ver Notas</string>
     <string name="passwordNew">Palavra-Passe</string>
+    <string name="spUm">file1</string>
+    <string name="spLogado">logado</string>
+    <string name="spUsername">username</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.example.reportarmais
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -26,6 +28,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     /**
@@ -60,14 +63,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             R.id.reportarAcidente-> {
 
-                Toast.makeText(this, "Não tou feito", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Ainda Estou em Desenvolvimento", Toast.LENGTH_LONG).show()
 
                 true
 
             }
             R.id.logout-> {
 
-                Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show()
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                with (SharedPref.edit()) {
+
+                    putBoolean(getString(R.string.spLogado), false)
+
+                    commit()
+
+                }
+
+                val intent = Intent(this, MainActivity::class.java)
+
+                startActivity(intent)
 
                 true
 

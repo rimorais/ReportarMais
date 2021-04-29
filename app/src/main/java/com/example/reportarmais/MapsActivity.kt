@@ -74,7 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             R.id.vernotas-> {
 
-                val intent = Intent(this, NotaCrud::class.java)
+                val intent = Intent(this, pagNotas::class.java)
 
                 startActivity(intent)
 

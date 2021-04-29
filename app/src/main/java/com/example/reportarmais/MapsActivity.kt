@@ -1,5 +1,6 @@
 package com.example.reportarmais
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -73,7 +74,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             R.id.vernotas-> {
 
-                Toast.makeText(this, "Não estou feito", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, NotaCrud::class.java)
+
+                startActivity(intent)
 
                 true
 

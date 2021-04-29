@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nomelogin"
+        android:title="@string/opcoesMenu"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item android:id="@+id/reportarAcidente"
+                android:title="@string/reportInc" />
+
+            <item android:id="@+id/logout"
+                android:title="@string/logout" />
+
+            <item android:id="@+id/vernotas"
+                android:title="@string/notasNew" />
+
+        </menu>
+
+    </item>
+
+</menu>

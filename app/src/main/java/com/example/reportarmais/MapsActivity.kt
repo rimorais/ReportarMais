@@ -2,6 +2,10 @@ package com.example.reportarmais
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -40,4 +44,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+
+            R.id.reportarAcidente-> {
+
+                Toast.makeText(this, "Não tou feito", Toast.LENGTH_LONG).show()
+
+                true
+
+            }
+            R.id.logout-> {
+
+                Toast.makeText(this, "Logout", Toast.LENGTH_LONG).show()
+
+                true
+
+            }
+            R.id.vernotas-> {
+
+                Toast.makeText(this, "Não estou feito", Toast.LENGTH_LONG).show()
+
+                true
+
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
+
+    }
+
 }

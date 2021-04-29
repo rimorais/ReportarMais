@@ -18,4 +18,7 @@
     <string name="spUm">file1</string>
     <string name="spLogado">logado</string>
     <string name="spUsername">username</string>
+    <string name="logout">Logout</string>
+    <string name="reportInc">Report Incident</string>
+    <string name="opcoesMenu">Options</string>
 </resources>

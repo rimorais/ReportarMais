@@ -5,5 +5,5 @@ data class Incident(
     val descrip: String,
     val lat: String,
     val lon: String,
-    val usernm: Int
+    val usernm: String
 )

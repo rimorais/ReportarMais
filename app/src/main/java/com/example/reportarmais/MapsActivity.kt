@@ -64,8 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             incident.lon.toString().toDouble())
 
                         mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                + " - " + incident.lat + " ; " + incident.lon + " "
-                                + "by: " + incident.usernm))
+                                + " - " + incident.lat + " ; " + incident.lon + " by: " + incident.usernm))
                     }
                 }
             }

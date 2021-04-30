@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
@@ -63,8 +64,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         position = LatLng(incident.lat.toString().toDouble(),
                             incident.lon.toString().toDouble())
 
-                        mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                + " - " + incident.lat + " ; " + incident.lon + " by: " + incident.usernm))
+                        if (usernam == incident.usernm) {
+
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
+                                    + " - " + incident.lat + " ; " + incident.lon
+                                    + " by: " + incident.usernm).icon(
+                                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+
+                        }
+                        else {
+
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
+                                    + " - " + incident.lat + " ; " + incident.lon + " by: " + incident.usernm))
+
+                        }
+
                     }
                 }
             }

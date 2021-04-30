@@ -9,6 +9,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.reportarmais.api.EndPoints
+import com.example.reportarmais.api.Incident
+import com.example.reportarmais.api.ServiceBuilder
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -16,12 +19,16 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 const val MESSAGE_MAPS = "maps"
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var incidents: List<Incident>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getIncidents()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Incident>>{
+            override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                if (response.isSuccessful){
+
+                    incidents = response.body()!!
+                    for (incident in incidents) {
+
+                        position = LatLng(incident.lat.toString().toDouble(),
+                            incident.lon.toString().toDouble())
+
+                        mMap.addMarker(MarkerOptions().position(position).title(incident.descrip))
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 
@@ -47,11 +77,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+/*
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+ */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -10,7 +10,7 @@
     <string name="delete">Eliminar</string>
     <string name="empty_not_saved">Não Pode Ser Vazio</string>
     <string name="title_activity_maps">Mapa</string>
-    <string name="emailNew">Email</string>
+    <string name="emailNew">Nome de Utilizador</string>
     <string name="loginNew">Login</string>
     <string name="notasNew">Ver Notas</string>
     <string name="passwordNew">Palavra-Passe</string>

@@ -41,6 +41,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
 
+        val SharedPref: SharedPreferences = getSharedPreferences(
+
+            getString(R.string.spUm), Context.MODE_PRIVATE
+
+        )
+
+        val usernm = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getIncidents()
         var position: LatLng

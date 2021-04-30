@@ -47,7 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         )
 
-        val usernm = SharedPref.getString(getString(R.string.spUsername), "Nome")
+        val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getIncidents()
@@ -63,7 +63,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         position = LatLng(incident.lat.toString().toDouble(),
                             incident.lon.toString().toDouble())
 
-                        mMap.addMarker(MarkerOptions().position(position).title(incident.descrip))
+                        mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
+                                + " - " + incident.lat + " ; " + incident.lon + " "
+                                + "by: " + incident.usernm))
                     }
                 }
             }

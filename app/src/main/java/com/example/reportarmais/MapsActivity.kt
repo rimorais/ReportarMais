@@ -67,7 +67,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         if (usernam == incident.usernm) {
 
                             mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                    + " - " + incident.lat + " ; " + incident.lon
                                     + " by: " + incident.usernm).icon(
                                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
 
@@ -75,11 +74,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         else {
 
                             mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                    + " - " + incident.lat + " ; " + incident.lon + " by: " + incident.usernm))
+                                    + " by: " + incident.usernm))
 
                         }
 
                     }
+
+                    val viana = LatLng(41.6931623, -8.85015)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
                 }
             }
             override fun onFailure(call: Call<List<Incident>>, t: Throwable) {

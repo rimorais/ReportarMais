@@ -163,4 +163,13 @@ class MainActivity : AppCompatActivity() {
          */
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        finishAffinity()
+
+        return true
+    }
+
 }

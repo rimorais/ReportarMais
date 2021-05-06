@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.reportarmais.api.EndPoints
+import com.example.reportarmais.api.Incident
 import com.example.reportarmais.api.RemoveIncPost
 import com.example.reportarmais.api.ServiceBuilder
 import retrofit2.Call
@@ -23,12 +24,29 @@ class IncidenteCrud : AppCompatActivity() {
         setContentView(R.layout.activity_incidente_crud)
 
         val id = intent.getStringExtra(EXTRA_ID_MAPS)
+        val ID = id!!.toInt()
 
         val textId = findViewById<TextView>(R.id.textView).apply {
 
             text = id
 
         }
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getIncidentById(ID)
+
+        call.enqueue(object : Callback<Incident>{
+            override fun onResponse(call: Call<Incident>, response: Response<Incident>) {
+                if (response.isSuccessful){
+                    val c: Incident = response.body()!!
+                    Toast.makeText(this@IncidenteCrud, c.cat.toString(), Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Incident>, t: Throwable) {
+                Toast.makeText(this@IncidenteCrud, "${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
 
         val SharedPref: SharedPreferences = getSharedPreferences(
 

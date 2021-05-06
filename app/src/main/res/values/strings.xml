@@ -24,4 +24,8 @@
     <string name="autor">Por</string>
     <string name="id">id</string>
     <string name="quemReportou">Quem Reportou</string>
+    <string name="acidente">Acidentes</string>
+    <string name="avistamento">Avistamentos</string>
+    <string name="obra">Obras</string>
+    <string name="filtro">Filtros</string>
 </resources>

@@ -3,6 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/filtros"
+        android:title="@string/filtro"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item android:id="@+id/tubaroes"
+                android:title="@string/acidente" />
+
+            <item android:id="@+id/derrocada"
+                android:title="@string/avistamento" />
+
+            <item android:id="@+id/bnopasseio"
+                android:title="@string/obra" />
+
+        </menu>
+
+    </item>
+
+    <item
         android:id="@+id/nomelogin"
         android:title="@string/opcoesMenu"
         app:showAsAction="always">

@@ -25,4 +25,8 @@
     <string name="autor">By</string>
     <string name="id">id</string>
     <string name="quemReportou">Who Reported</string>
+    <string name="acidente">Accidents</string>
+    <string name="avistamento">Sightings</string>
+    <string name="obra">Constructions</string>
+    <string name="filtro">Filters</string>
 </resources>

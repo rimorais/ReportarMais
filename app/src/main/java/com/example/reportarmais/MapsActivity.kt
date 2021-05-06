@@ -23,6 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 const val MESSAGE_MAPS = "maps"
+const val EXTRA_ID_MAPS = "id"
 
 class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
     GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
@@ -230,6 +231,14 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
     override fun onInfoWindowClick(marker: Marker) {
 
         Toast.makeText(this@MapsActivity, marker.title, Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, IncidenteCrud::class.java).apply {
+
+            putExtra(EXTRA_ID_MAPS, marker.title)
+
+        }
+
+        startActivity(intent)
 
     }
 

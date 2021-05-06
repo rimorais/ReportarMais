@@ -13,7 +13,7 @@ interface EndPoints {
     fun postTest(@Field("validar") first: String?): Call<OutputPost>
 
     @FormUrlEncoded
-    @POST("/myslim/index.php/api/removeIncident")
-    fun removeInc(@Field("idRemove") first: Int?): Call<RemoveIncPost>
+    @POST("/myslim/index.php/api/deleteIncident")
+    fun removeInc(@Field("id") first: Int?): Call<RemoveIncPost>
 
 }

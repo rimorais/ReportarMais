@@ -220,35 +220,243 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
             }
             R.id.tudonormal-> {
 
-                Toast.makeText(this, "Mostrar Tudo", Toast.LENGTH_SHORT).show()
+                mMap.clear()
 
-                true
+                val SharedPref: SharedPreferences = getSharedPreferences(
 
-            }
-            R.id.tudoanimado-> {
+                    getString(R.string.spUm), Context.MODE_PRIVATE
 
-                Toast.makeText(this, "Mostrar Tudo Animado", Toast.LENGTH_SHORT).show()
+                )
+
+                val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getIncidents()
+                var position: LatLng
+
+                call.enqueue(object : Callback<List<Incident>>{
+                    override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                        if (response.isSuccessful){
+
+                            incidents = response.body()!!
+                            for (incident in incidents) {
+
+                                position = LatLng(incident.lat.toString().toDouble(),
+                                    incident.lon.toString().toDouble())
+
+                                if (usernam == incident.usernm) {
+
+                                    mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                        .snippet(incident.cat + " - " + incident.usernm).icon(
+                                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+
+                                }
+                                else {
+
+                                    mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                        .snippet(incident.cat + " - " + incident.usernm))
+
+                                }
+
+                            }
+
+                            val viana = LatLng(41.6931623, -8.85015)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+                mMap.setOnInfoWindowClickListener(this)
 
                 true
 
             }
             R.id.tubaroes-> {
 
-                Toast.makeText(this, "Sou um acidente", Toast.LENGTH_SHORT).show()
+                mMap.clear()
+
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getIncidents()
+                var position: LatLng
+
+                call.enqueue(object : Callback<List<Incident>>{
+                    override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                        if (response.isSuccessful){
+
+                            incidents = response.body()!!
+                            for (incident in incidents) {
+
+                                position = LatLng(incident.lat.toString().toDouble(),
+                                    incident.lon.toString().toDouble())
+
+                                if (incident.cat == "Acidentes") {
+
+                                    if (usernam == incident.usernm) {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.acidentenossos)))
+
+                                    }
+                                    else {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.acidentedeles)))
+
+                                    }
+
+                                }
+
+                            }
+
+                            val viana = LatLng(41.6931623, -8.85015)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+                mMap.setOnInfoWindowClickListener(this)
 
                 true
 
             }
             R.id.derrocada-> {
 
-                Toast.makeText(this, "Sou um avistamento", Toast.LENGTH_SHORT).show()
+                mMap.clear()
+
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getIncidents()
+                var position: LatLng
+
+                call.enqueue(object : Callback<List<Incident>>{
+                    override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                        if (response.isSuccessful){
+
+                            incidents = response.body()!!
+                            for (incident in incidents) {
+
+                                position = LatLng(incident.lat.toString().toDouble(),
+                                    incident.lon.toString().toDouble())
+
+                                if (incident.cat == "Avistamentos") {
+
+                                    if (usernam == incident.usernm) {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.avistamentosnossos)))
+
+                                    }
+                                    else {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.avistamentosdeles)))
+
+                                    }
+
+                                }
+
+                            }
+
+                            val viana = LatLng(41.6931623, -8.85015)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+                mMap.setOnInfoWindowClickListener(this)
 
                 true
 
             }
             R.id.bnopasseio-> {
 
-                Toast.makeText(this, "Sou uma obra", Toast.LENGTH_SHORT).show()
+                mMap.clear()
+
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getIncidents()
+                var position: LatLng
+
+                call.enqueue(object : Callback<List<Incident>>{
+                    override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                        if (response.isSuccessful){
+
+                            incidents = response.body()!!
+                            for (incident in incidents) {
+
+                                position = LatLng(incident.lat.toString().toDouble(),
+                                    incident.lon.toString().toDouble())
+
+                                if (incident.cat == "Obras") {
+
+                                    if (usernam == incident.usernm) {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.obrasnossas)))
+
+                                    }
+                                    else {
+
+                                        mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                            .snippet(incident.cat + " - " + incident.usernm)
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.obrasdeles)))
+
+                                    }
+
+                                }
+
+                            }
+
+                            val viana = LatLng(41.6931623, -8.85015)
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
+                        }
+                    }
+                    override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+                mMap.setOnInfoWindowClickListener(this)
 
                 true
 

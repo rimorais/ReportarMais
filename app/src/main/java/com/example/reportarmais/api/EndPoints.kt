@@ -8,6 +8,9 @@ interface EndPoints {
     @GET("myslim/index.php/api/allIncidents")
     fun getIncidents(): Call<List<Incident>>
 
+    @GET("myslim/index.php/api/getIncident/{id}")
+    fun getIncidentById(@Path("id") first: Int): Call<Incident>
+
     @FormUrlEncoded
     @POST("/myslim/index.php/api/loginn")
     fun postTest(@Field("validar") first: String?): Call<OutputPost>

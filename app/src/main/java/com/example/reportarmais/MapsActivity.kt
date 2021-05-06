@@ -17,16 +17,15 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 const val MESSAGE_MAPS = "maps"
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
+    GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var incidents: List<Incident>
@@ -41,7 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
-
+/*
         val SharedPref: SharedPreferences = getSharedPreferences(
 
             getString(R.string.spUm), Context.MODE_PRIVATE
@@ -89,7 +88,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-
+*/
     }
 
     /**
@@ -103,6 +102,57 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        val SharedPref: SharedPreferences = getSharedPreferences(
+
+            getString(R.string.spUm), Context.MODE_PRIVATE
+
+        )
+
+        val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getIncidents()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Incident>>{
+            override fun onResponse(call: Call<List<Incident>>, response: Response<List<Incident>>) {
+                if (response.isSuccessful){
+
+                    incidents = response.body()!!
+                    for (incident in incidents) {
+
+                        position = LatLng(incident.lat.toString().toDouble(),
+                            incident.lon.toString().toDouble())
+
+                        if (usernam == incident.usernm) {
+
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                .snippet(incident.cat + " - " + incident.usernm).icon(
+                                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+
+                        }
+                        else {
+
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                .snippet(incident.cat + " - " + incident.usernm))
+
+                        }
+
+                    }
+
+                    val viana = LatLng(41.6931623, -8.85015)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(viana, 15f))
+
+                }
+            }
+            override fun onFailure(call: Call<List<Incident>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        mMap.setOnInfoWindowClickListener(this)
+
 /*
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
@@ -170,6 +220,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> super.onOptionsItemSelected(item)
 
         }
+
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        return false
+    }
+
+    override fun onInfoWindowClick(marker: Marker) {
+
+        Toast.makeText(this@MapsActivity, marker.title, Toast.LENGTH_LONG).show()
 
     }
 

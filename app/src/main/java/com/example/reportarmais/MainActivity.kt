@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+
         val SharedPref: SharedPreferences = getSharedPreferences(
 
             getString(R.string.spUm), Context.MODE_PRIVATE

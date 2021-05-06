@@ -21,4 +21,6 @@
     <string name="logout">Logout</string>
     <string name="reportInc">Report Incident</string>
     <string name="opcoesMenu">Options</string>
+    <string name="por">"By: "</string>
+    <string name="autor">By</string>
 </resources>

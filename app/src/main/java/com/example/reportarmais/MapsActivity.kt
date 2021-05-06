@@ -66,15 +66,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                         if (usernam == incident.usernm) {
 
-                            mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                    + " by: " + incident.usernm).icon(
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                .snippet(incident.cat + " - " + incident.usernm).icon(
                                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
 
                         }
                         else {
 
-                            mMap.addMarker(MarkerOptions().position(position).title(incident.descrip
-                                    + " by: " + incident.usernm))
+                            mMap.addMarker(MarkerOptions().position(position).title(incident.id.toString())
+                                .snippet(incident.cat + " - " + incident.usernm))
 
                         }
 

@@ -39,7 +39,27 @@ class IncidenteCrud : AppCompatActivity() {
             override fun onResponse(call: Call<Incident>, response: Response<Incident>) {
                 if (response.isSuccessful){
                     val c: Incident = response.body()!!
+
+                    val SharedPref: SharedPreferences = getSharedPreferences(
+
+                        getString(R.string.spUm), Context.MODE_PRIVATE
+
+                    )
+
+                    val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+                    val btEl = findViewById<Button>(R.id.button3)
+                    val btAl = findViewById<Button>(R.id.button4)
+
+                    if (usernam != c.usernm) {
+
+                        btEl.visibility = View.GONE
+                        btAl.visibility = View.GONE
+
+                    }
+
                     Toast.makeText(this@IncidenteCrud, c.cat.toString(), Toast.LENGTH_LONG).show()
+
                 }
             }
 
@@ -47,24 +67,6 @@ class IncidenteCrud : AppCompatActivity() {
                 Toast.makeText(this@IncidenteCrud, "${t.message}", Toast.LENGTH_LONG).show()
             }
         })
-
-        val SharedPref: SharedPreferences = getSharedPreferences(
-
-            getString(R.string.spUm), Context.MODE_PRIVATE
-
-        )
-
-        val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
-
-        val btEl = findViewById<Button>(R.id.button3)
-        val btAl = findViewById<Button>(R.id.button4)
-
-        if (usernam != "rimor") {
-
-            btEl.visibility = View.GONE
-            btAl.visibility = View.GONE
-
-        }
 
     }
 

@@ -1,9 +1,12 @@
 package com.example.reportarmais
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.reportarmais.api.EndPoints
@@ -24,6 +27,24 @@ class IncidenteCrud : AppCompatActivity() {
         val textId = findViewById<TextView>(R.id.textView).apply {
 
             text = id
+
+        }
+
+        val SharedPref: SharedPreferences = getSharedPreferences(
+
+            getString(R.string.spUm), Context.MODE_PRIVATE
+
+        )
+
+        val usernam = SharedPref.getString(getString(R.string.spUsername), "Nome")
+
+        val btEl = findViewById<Button>(R.id.button3)
+        val btAl = findViewById<Button>(R.id.button4)
+
+        if (usernam != "rimor") {
+
+            btEl.visibility = View.GONE
+            btAl.visibility = View.GONE
 
         }
 

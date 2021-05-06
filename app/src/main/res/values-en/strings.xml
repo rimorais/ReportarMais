@@ -23,4 +23,5 @@
     <string name="opcoesMenu">Options</string>
     <string name="por">"By: "</string>
     <string name="autor">By</string>
+    <string name="id">id</string>
 </resources>

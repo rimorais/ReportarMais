@@ -28,4 +28,6 @@
     <string name="avistamento">Avistamentos</string>
     <string name="obra">Obras</string>
     <string name="filtro">Filtros</string>
+    <string name="allnor">Tudo</string>
+    <string name="tudoani">Tudo - Animado</string>
 </resources>

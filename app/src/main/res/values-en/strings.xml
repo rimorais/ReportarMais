@@ -29,4 +29,6 @@
     <string name="avistamento">Sightings</string>
     <string name="obra">Constructions</string>
     <string name="filtro">Filters</string>
+    <string name="allnor">All</string>
+    <string name="tudoani">All - Animated</string>
 </resources>

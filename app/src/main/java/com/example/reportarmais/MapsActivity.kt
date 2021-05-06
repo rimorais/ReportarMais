@@ -218,6 +218,41 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
                 true
 
             }
+            R.id.tudonormal-> {
+
+                Toast.makeText(this, "Mostrar Tudo", Toast.LENGTH_SHORT).show()
+
+                true
+
+            }
+            R.id.tudoanimado-> {
+
+                Toast.makeText(this, "Mostrar Tudo Animado", Toast.LENGTH_SHORT).show()
+
+                true
+
+            }
+            R.id.tubaroes-> {
+
+                Toast.makeText(this, "Sou um acidente", Toast.LENGTH_SHORT).show()
+
+                true
+
+            }
+            R.id.derrocada-> {
+
+                Toast.makeText(this, "Sou um avistamento", Toast.LENGTH_SHORT).show()
+
+                true
+
+            }
+            R.id.bnopasseio-> {
+
+                Toast.makeText(this, "Sou uma obra", Toast.LENGTH_SHORT).show()
+
+                true
+
+            }
             else -> super.onOptionsItemSelected(item)
 
         }

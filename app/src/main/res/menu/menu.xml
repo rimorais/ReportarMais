@@ -9,6 +9,12 @@
 
         <menu>
 
+            <item android:id="@+id/tudonormal"
+                android:title="@string/allnor" />
+
+            <item android:id="@+id/tudoanimado"
+                android:title="@string/tudoani" />
+
             <item android:id="@+id/tubaroes"
                 android:title="@string/acidente" />
 

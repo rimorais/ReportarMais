@@ -31,4 +31,9 @@
     <string name="allnor">Tudo</string>
     <string name="tudoani">Tudo - Animado</string>
     <string name="cate">Categoria</string>
+    <string-array name="Tipos">
+        <item>Acidentes</item>
+        <item>Avistamentos</item>
+        <item>Obras</item>
+    </string-array>
 </resources>

@@ -6,9 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.reportarmais.api.EndPoints
 import com.example.reportarmais.api.Incident
 import com.example.reportarmais.api.RemoveIncPost
@@ -60,6 +58,46 @@ class IncidenteCrud : AppCompatActivity() {
 
                     Toast.makeText(this@IncidenteCrud, c.cat.toString(), Toast.LENGTH_LONG).show()
 
+                    val tipos = resources.getStringArray(R.array.Tipos)
+
+                    val spinner = findViewById<Spinner>(R.id.spinner)
+                    if (spinner != null) {
+                        val adapter = ArrayAdapter(this@IncidenteCrud,
+                            android.R.layout.simple_spinner_item, tipos)
+                        spinner.adapter = adapter
+
+                        spinner.onItemSelectedListener = object :
+                            AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>,
+                                                        view: View, position: Int, id: Long) {
+
+                                val selecionado = tipos[position]
+
+                                val tvSpinner = findViewById<TextView>(R.id.textView2).apply {
+
+                                    text = selecionado
+
+                                }
+                            }
+
+                            override fun onNothingSelected(parent: AdapterView<*>) {
+                                // write code to perform some action
+                            }
+                        }
+                    }
+
+                    val et = findViewById<EditText>(R.id.editText3).apply {
+
+                        hint = c.des
+
+                    }
+
+                    val textV = findViewById<TextView>(R.id.textView3).apply {
+
+                        text = c.usernm
+
+                    }
+
                 }
             }
 
@@ -99,4 +137,6 @@ class IncidenteCrud : AppCompatActivity() {
         })
 
     }
+
+    fun alterarIncidente(view: View) {}
 }

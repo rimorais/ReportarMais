@@ -32,4 +32,6 @@
     <string name="allnor">All</string>
     <string name="tudoani">All - Animated</string>
     <string name="cate">Category</string>
+    <string name="lati">Lat</string>
+    <string name="longi">Lon</string>
 </resources>

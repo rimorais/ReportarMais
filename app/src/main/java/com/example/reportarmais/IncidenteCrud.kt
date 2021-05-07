@@ -21,6 +21,9 @@ class IncidenteCrud : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_incidente_crud)
 
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+
         val id = intent.getStringExtra(EXTRA_ID_MAPS)
         val ID = id!!.toInt()
 
@@ -48,6 +51,7 @@ class IncidenteCrud : AppCompatActivity() {
 
                     val btEl = findViewById<Button>(R.id.button3)
                     val btAl = findViewById<Button>(R.id.button4)
+                    val tvDp = findViewById<TextView>(R.id.textView2)
 
                     if (usernam != c.usernm) {
 
@@ -55,6 +59,8 @@ class IncidenteCrud : AppCompatActivity() {
                         btAl.visibility = View.GONE
 
                     }
+
+                    tvDp.visibility = View.GONE
 
                     val tipos = resources.getStringArray(R.array.Tipos)
 
@@ -84,6 +90,12 @@ class IncidenteCrud : AppCompatActivity() {
                         }
                     }
 
+                    val texViewQ = findViewById<TextView>(R.id.textView4).apply {
+
+                        text = c.cat
+
+                    }
+
                     val et = findViewById<EditText>(R.id.editText3).apply {
 
                         hint = c.des
@@ -93,6 +105,37 @@ class IncidenteCrud : AppCompatActivity() {
                     val textV = findViewById<TextView>(R.id.textView3).apply {
 
                         text = c.usernm
+
+                    }
+
+                    val tLat = findViewById<TextView>(R.id.textView5).apply {
+
+                        text = "Lat: " + c.lat
+
+                    }
+
+                    val tLon = findViewById<TextView>(R.id.textView6).apply {
+
+                        text = "Lon: " + c.lon
+
+                    }
+
+                    if (c.cat == "Obras") {
+
+                        val pic = findViewById<ImageView>(R.id.imageView)
+                            .setImageResource(R.drawable.construction)
+
+                    }
+                    if (c.cat == "Acidentes") {
+
+                        val pic = findViewById<ImageView>(R.id.imageView)
+                            .setImageResource(R.drawable.crash)
+
+                    }
+                    if (c.cat == "Avistamentos") {
+
+                        val pic = findViewById<ImageView>(R.id.imageView)
+                            .setImageResource(R.drawable.sharks)
 
                     }
 
@@ -202,4 +245,15 @@ class IncidenteCrud : AppCompatActivity() {
         }
 
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        val intent = Intent(this, MapsActivity::class.java)
+
+        startActivity(intent)
+
+        return true
+    }
+
 }

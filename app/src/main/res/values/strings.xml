@@ -36,4 +36,6 @@
         <item>Avistamentos</item>
         <item>Obras</item>
     </string-array>
+    <string name="lati">Lat</string>
+    <string name="longi">Lon</string>
 </resources>

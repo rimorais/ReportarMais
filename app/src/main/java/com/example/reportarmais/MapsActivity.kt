@@ -53,7 +53,7 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
         actionbar!!.setDisplayHomeAsUpEnabled(true)
 /*
         val SharedPref: SharedPreferences = getSharedPreferences(
-
+//
             getString(R.string.spUm), Context.MODE_PRIVATE
 
         )

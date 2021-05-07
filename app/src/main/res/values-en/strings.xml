@@ -34,4 +34,5 @@
     <string name="cate">Category</string>
     <string name="lati">Lat</string>
     <string name="longi">Lon</string>
+    <string name="spIdUser">iduser</string>
 </resources>

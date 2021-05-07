@@ -13,7 +13,7 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("/myslim/index.php/api/loginn")
-    fun postTest(@Field("validar") first: String?): Call<OutputPost>
+    fun postTest(@Field("username") username: String?, @Field("passwd") passwd: String?): Call<OutputPost>
 
     @FormUrlEncoded
     @POST("/myslim/index.php/api/deleteIncident")

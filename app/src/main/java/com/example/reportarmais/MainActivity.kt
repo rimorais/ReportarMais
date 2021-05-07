@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         val nome = SharedPref.getString(getString(R.string.spUsername), "Nome")
 
+        val iduser = SharedPref.getString(getString(R.string.spIdUser), "0")
+
         if (logar) {
 
             val intent = Intent(this, MapsActivity::class.java).apply {
@@ -64,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         var pw = findViewById<EditText>(R.id.editText2)
         var ust = us.text.toString()
         var pwt = pw.text.toString()
-        var enviar = ust + pwt
 
         if (ust.isNullOrEmpty() || pwt.isNullOrEmpty()) {
 
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         else {
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.postTest(enviar)
+            val call = request.postTest(ust, pwt)
 
             call.enqueue(object : Callback<OutputPost>{
                 override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
@@ -96,6 +97,8 @@ class MainActivity : AppCompatActivity() {
                                 putBoolean(getString(R.string.spLogado), true)
 
                                 putString(getString(R.string.spUsername), ust)
+
+                                putString(getString(R.string.spIdUser), c.idUser.toString())
 
                                 commit()
 

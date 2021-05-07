@@ -177,7 +177,15 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
             R.id.reportarAcidente-> {
 
-                Toast.makeText(this, "Ainda Estou em Desenvolvimento", Toast.LENGTH_LONG).show()
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                val iduser = SharedPref.getString(getString(R.string.spIdUser), "1")
+
+                Toast.makeText(this, iduser, Toast.LENGTH_LONG).show()
 
                 true
 
@@ -192,7 +200,9 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
                 with (SharedPref.edit()) {
 
-                    putBoolean(getString(R.string.spLogado), false)
+                    //putBoolean(getString(R.string.spLogado), false)
+
+                    clear()
 
                     commit()
 
@@ -480,15 +490,16 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
         }
 
         startActivity(intent)
+    }
+        override fun onSupportNavigateUp(): Boolean {
+            onBackPressed()
 
+            finishAffinity()
+
+            return true
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
 
-        finishAffinity()
 
-        return true
-    }
 
-}

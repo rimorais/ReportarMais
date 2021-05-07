@@ -39,4 +39,6 @@
     <string name="lati">Lat</string>
     <string name="longi">Lon</string>
     <string name="spIdUser">iduser</string>
+    <string name="spLat">lat</string>
+    <string name="spLon">lon</string>
 </resources>

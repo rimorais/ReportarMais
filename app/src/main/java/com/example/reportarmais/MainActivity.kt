@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         val iduser = SharedPref.getString(getString(R.string.spIdUser), "0")
 
+        val spLAT = SharedPref.getString(getString(R.string.spLat), "0")
+
+        val spLON = SharedPref.getString(getString(R.string.spLon), "0")
+
         if (logar) {
 
             val intent = Intent(this, MapsActivity::class.java).apply {

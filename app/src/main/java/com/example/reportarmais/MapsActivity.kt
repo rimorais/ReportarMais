@@ -12,12 +12,16 @@ import android.widget.Toast
 import com.example.reportarmais.api.EndPoints
 import com.example.reportarmais.api.Incident
 import com.example.reportarmais.api.ServiceBuilder
-
+import androidx.core.app.ActivityCompat
+import android.content.pm.PackageManager
+import android.location.Location
+import android.util.Log
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.gms.location.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +34,12 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
     private lateinit var mMap: GoogleMap
     private lateinit var incidents: List<Incident>
+
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var locationRequest: LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +100,39 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
             }
         })
 */
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        //added to implement location periodic updates
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult) {
+                super.onLocationResult(p0)
+                lastLocation = p0.lastLocation
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
+                Log.d("**** SARA", "new location received - " + loc.latitude + " -" + loc.longitude)
+
+                val SharedPref: SharedPreferences = getSharedPreferences(
+
+                    getString(R.string.spUm), Context.MODE_PRIVATE
+
+                )
+
+                with (SharedPref.edit()) {
+
+                    putString(getString(R.string.spLat), loc.latitude.toString())
+
+                    putString(getString(R.string.spLon), loc.longitude.toString())
+
+                    commit()
+
+                }
+
+            }
+        }
+
+        createLocationRequest()
+
     }
 
     /**
@@ -183,9 +226,11 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
                 )
 
-                val iduser = SharedPref.getString(getString(R.string.spIdUser), "1")
+                val spLAT = SharedPref.getString(getString(R.string.spLat), "0")
 
-                Toast.makeText(this, iduser, Toast.LENGTH_LONG).show()
+                val spLON = SharedPref.getString(getString(R.string.spLon), "0")
+
+                Toast.makeText(this, spLAT + " " + spLON, Toast.LENGTH_LONG).show()
 
                 true
 
@@ -475,6 +520,42 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
         }
 
+    }
+
+    companion object {
+        // add to implement last known location
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        //added to implement location periodic updates
+        private const val REQUEST_CHECK_SETTINGS = 2
+    }
+
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+    }
+
+    private fun createLocationRequest() {
+        locationRequest = LocationRequest()
+        // interval specifies the rate at which your app will like to receive updates.
+        locationRequest.interval = 10000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

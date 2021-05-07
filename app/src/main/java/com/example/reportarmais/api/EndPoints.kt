@@ -19,4 +19,9 @@ interface EndPoints {
     @POST("/myslim/index.php/api/deleteIncident")
     fun removeInc(@Field("id") first: Int?): Call<RemoveIncPost>
 
+    @FormUrlEncoded
+    @POST("/myslim/index.php/api/updateIncident")
+    fun updateInc(@Field("id") id: Int?, @Field("cat") cat: String?,
+                  @Field("des") des: String?): Call<RemoveIncPost>
+
 }

@@ -136,5 +136,70 @@ class IncidenteCrud : AppCompatActivity() {
 
     }
 
-    fun alterarIncidente(view: View) {}
+    fun alterarIncidente(view: View) {
+
+        val id = intent.getStringExtra(EXTRA_ID_MAPS)
+        val ID = id!!.toInt()
+
+        val textoCat = findViewById<TextView>(R.id.textView2).text.toString()
+        val textoDes = findViewById<EditText>(R.id.editText3).text.toString()
+
+        if (textoDes.isNullOrEmpty()) {
+
+            var descript = findViewById<EditText>(R.id.editText3).hint.toString()
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.updateInc(ID, textoCat, descript)
+
+            call.enqueue(object : Callback<RemoveIncPost> {
+                override fun onResponse(call: Call<RemoveIncPost>, response: Response<RemoveIncPost>) {
+                    if (response.isSuccessful){
+                        val c: RemoveIncPost = response.body()!!
+
+                        Toast.makeText(this@IncidenteCrud, c.msg.toString(), Toast.LENGTH_LONG).show()
+
+                        val intent = Intent(this@IncidenteCrud, MapsActivity::class.java)
+
+                        startActivity(intent)
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<RemoveIncPost>, t: Throwable) {
+                    Toast.makeText(this@IncidenteCrud, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        }
+        else {
+
+            var descript = findViewById<EditText>(R.id.editText3).text.toString()
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.updateInc(ID, textoCat, descript)
+
+            call.enqueue(object : Callback<RemoveIncPost> {
+                override fun onResponse(call: Call<RemoveIncPost>, response: Response<RemoveIncPost>) {
+                    if (response.isSuccessful){
+                        val c: RemoveIncPost = response.body()!!
+
+                        Toast.makeText(this@IncidenteCrud, c.msg.toString(), Toast.LENGTH_LONG).show()
+
+                        val intent = Intent(this@IncidenteCrud, MapsActivity::class.java)
+
+                        startActivity(intent)
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<RemoveIncPost>, t: Throwable) {
+                    Toast.makeText(this@IncidenteCrud, "${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        }
+
+    }
 }

@@ -56,8 +56,6 @@ class IncidenteCrud : AppCompatActivity() {
 
                     }
 
-                    Toast.makeText(this@IncidenteCrud, c.cat.toString(), Toast.LENGTH_LONG).show()
-
                     val tipos = resources.getStringArray(R.array.Tipos)
 
                     val spinner = findViewById<Spinner>(R.id.spinner)

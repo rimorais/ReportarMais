@@ -24,4 +24,11 @@ interface EndPoints {
     fun updateInc(@Field("id") id: Int?, @Field("cat") cat: String?,
                   @Field("des") des: String?): Call<RemoveIncPost>
 
+    @FormUrlEncoded
+    @POST("/myslim/index.php/api/insertIncident")
+    fun insertInc(@Field("cat") cat: String?, @Field("url") url: String?,
+                  @Field("lat") lat: String?, @Field("lon") lon: String?,
+                  @Field("users_id") users_id: String?, @Field("des") des: String?):
+            Call<RemoveIncPost>
+
 }

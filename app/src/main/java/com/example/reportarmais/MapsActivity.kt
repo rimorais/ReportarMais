@@ -230,7 +230,9 @@ class MapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener,
 
                 val spLON = SharedPref.getString(getString(R.string.spLon), "0")
 
-                Toast.makeText(this, spLAT + " " + spLON, Toast.LENGTH_LONG).show()
+                val intent = Intent(this, ReportarIncidente::class.java)
+
+                startActivity(intent)
 
                 true
 

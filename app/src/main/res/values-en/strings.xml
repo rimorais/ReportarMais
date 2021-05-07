@@ -37,4 +37,6 @@
     <string name="spIdUser">iduser</string>
     <string name="spLat">lat</string>
     <string name="spLon">lon</string>
+    <string name="descript">Description</string>
+    <string name="rep">Report</string>
 </resources>
